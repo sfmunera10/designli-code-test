@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SesSnsEventMapperService } from './ses-sns-event-mapper.service';
+import { SesSnsEventMapperService } from './providers/ses-sns-event-mapper.service';
 
 describe('SesSnsEventMapperService', () => {
   let service: SesSnsEventMapperService;
