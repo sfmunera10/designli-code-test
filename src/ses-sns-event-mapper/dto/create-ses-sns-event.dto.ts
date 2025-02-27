@@ -1,4 +1,4 @@
-import { SesVerdict } from '../interfaces/ses-sns-event.interface';
+import { SesVerdict } from '../interfaces/ses-sns-event';
 
 export class CreateSesSnsEventDto {
   Records: SesSnsEventRecord[];
