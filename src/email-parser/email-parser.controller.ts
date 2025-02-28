@@ -1,25 +1,22 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
-import { EmailParserService } from './email-parser.service';
-import { createReadStream } from 'fs';
-import { join } from 'path';
-import { AttachmentStream, MailParser, MessageText } from 'mailparser';
+import { Controller, Get, Inject, Param, Query, Res } from '@nestjs/common';
+import { EmailParserService } from './providers/email-parser.service';
 import { Response } from 'express';
+import { IEmailParserService } from './interfaces/email-parser.service';
+import { EmailAttatchmentOutput } from './constants';
 
 @Controller('email-parser')
 export class EmailParserController {
-  constructor(private readonly emailParserService: EmailParserService) {}
+  constructor(
+    @Inject(EmailParserService)
+    private readonly emailParserService: IEmailParserService,
+  ) {}
   @Get(':resource')
   getEmailAttatchment(
     @Param('resource') emailUrlOrPath: string,
     @Res() res: Response,
+    @Query('output')
+    output: EmailAttatchmentOutput = EmailAttatchmentOutput.ATTACHMENT,
   ) {
-    createReadStream(join(process.cwd(), 'emails', emailUrlOrPath))
-      .pipe(new MailParser())
-      .on('data', (data: AttachmentStream | MessageText) => {
-        if (data.type === 'attachment') {
-          data.content.pipe(res);
-          data.content.on('end', () => data.release());
-        }
-      });
+    this.emailParserService.getEmailAttatchment(emailUrlOrPath, res, output);
   }
 }
