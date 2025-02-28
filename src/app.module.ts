@@ -12,7 +12,6 @@ import { join } from 'path';
     EmailParserModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
-      renderPath: '/public',
     }),
   ],
   controllers: [AppController],

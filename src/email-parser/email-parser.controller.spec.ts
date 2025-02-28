@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EmailParserController } from './email-parser.controller';
-import { EmailParserService } from './email-parser.service';
+import { EmailParserService } from './providers/email-parser.service';
 
 describe('EmailParserController', () => {
   let controller: EmailParserController;
