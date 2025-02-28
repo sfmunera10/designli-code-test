@@ -31,15 +31,34 @@ export class SesSnsEventMapperController {
   @ApiCreatedResponse({
     description:
       'Input JSON received and output JSON resource created and returned.',
-    type: String,
+    example: {
+      spam: true,
+      virus: true,
+      dns: true,
+      mes: 'septiembre',
+      retrasado: false,
+      emisor: '61967230-7A45-4A9D-BEC9-87CBCF2211C9',
+      receptor: ['recipient'],
+    },
   })
   @ApiBadRequestResponse({
     description: 'Bad parameters passed to the request (Input JSON).',
-    type: Array<string>,
+    example: {
+      message: [
+        'Records.0.eventVersion must be a number string',
+        'Records.0.ses.receipt.timestamp must be a valid ISO 8601 date string',
+      ],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
   })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error.',
-    type: String,
+    example: {
+      message: 'Something went wrong when trying to map the input event.',
+      error: 'Internal Server Error',
+      statusCode: 500,
+    },
   })
   @UsePipes(new ValidationPipe())
   createMappedSeSSnsEvent(
