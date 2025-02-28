@@ -80,7 +80,31 @@ $  npm  run  test:cov
 
 ## API Documentation
 
-Once you run the project locally, you can access the API documentation at http://localhost:3000/api. Here's
+Once you run the project locally, you can access the API documentation at http://localhost:3000/api
+
+## Demo and postman collection
+
+I'm using a lightweight HTTP client UI known as https://www.thunderclient.com/. It allows to export postman collections so you can test each endpoint locally using the collecion file:
+
+    postman_collection_designli_code_test
+
+As for the Demo, there's an MP4 video to see the working solution:
+
+    Designli Code Test Demo.mp4
+
+## Static assets folders for local testing (emails and public)
+
+The following folders are used for serving static files, each with one specific purpose:
+
+```
+# You need to put .eml files in this folder in order to test the email parser endpoint. Path parameter URLs for these files have the following URI encoded format: 'http%3A%2F%2Flocalhost%3A3000%2F${FILENAME_GOES_HERE}.eml'. As for path parameter file paths, you can just pass the email filename (e.g. test.eml)
+emails
+
+# Public folder is for the output files (email attachments and static webpages for the email parser endpoint).
+public
+
+
+```
 
 ## Stay in touch
 
