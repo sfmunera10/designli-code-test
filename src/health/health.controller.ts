@@ -1,10 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   HealthCheckService,
   HttpHealthIndicator,
   HealthCheck,
 } from '@nestjs/terminus';
-
+@ApiTags('health')
 @Controller('health')
 export class HealthController {
   constructor(
@@ -13,6 +14,7 @@ export class HealthController {
   ) {}
 
   @Get()
+  @ApiOperation({ summary: 'Performs HTTP health checks.' })
   @HealthCheck()
   check() {
     return this.health.check([
@@ -25,6 +27,13 @@ export class HealthController {
   }
 
   @Get('ping')
+  @ApiOperation({
+    summary:
+      'Returns a ping response indicating that the HTTP health indicator of this app is up and running.',
+  })
+  @ApiOkResponse({
+    example: 'OK',
+  })
   pingCheck() {
     return 'OK';
   }
