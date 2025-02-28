@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SesSnsEventMapperService } from './providers/ses-sns-event-mapper.service';
+import { SesSnsEventMapperService } from './ses-sns-event-mapper.service';
+import { DynamicObjectMapperService } from './dynamic-object-mapper.service';
 
 describe('SesSnsEventMapperService', () => {
   let service: SesSnsEventMapperService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SesSnsEventMapperService],
+      providers: [SesSnsEventMapperService, DynamicObjectMapperService],
     }).compile();
 
     service = module.get<SesSnsEventMapperService>(SesSnsEventMapperService);
